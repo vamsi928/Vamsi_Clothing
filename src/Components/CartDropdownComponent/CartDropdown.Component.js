@@ -4,7 +4,7 @@ import CustomButton from '../Custom-button/Custom-button.Component';
 import CartItemComponent from '../CartItemComponent/CartItem.Component';
 import { connect } from 'react-redux';
 import history from '../../history';
-import { showCart } from '../../actions/Cart/showCart';
+import { showCart } from '../../reducers/CartReducer/showCart';
 class CartDropdown extends React.Component{
 
     render(){

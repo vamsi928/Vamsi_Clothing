@@ -1,8 +1,7 @@
 import React from "react";
 import "./CheckOutItem.style.scss";
 import { connect } from "react-redux";
-import { removeitem } from "../../actions/Cart/showCart";
-import { additem, removeSingleItem } from "../../actions/Cart/showCart";
+import { additem, removeSingleItem, removeitem } from "../../reducers/CartReducer/showCart";
 
 const CheckOutItemComponent = (props) => (
   <span style={{ width: "100%" }}>

@@ -1,67 +1,42 @@
 import React from "react";
 import "./Header.style.scss";
-import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { connect } from "react-redux";
-import { auth, createUserProfileDocument } from "../../firebase/firebase.util";
-import { setCurrentUser } from "../../actions/Authentication/clothing-auth";
 import CartIcon from "../CartIconComponent/CartIcon.Component";
 import CartDropdown from "../CartDropdownComponent/CartDropdown.Component";
-
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionLink,
+  OptionsContainer,
+  OptionDiv,
+} from "./Header.styles";
+import { signOutStart } from '../../reducers/UserReducer/User.actions'
 
 class HeaderComponent extends React.Component {
-  unsubscribeFromAuth = null;
-  componentDidMount = () => {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      //onAuthStateChanged returns a methond to unsubscribe assigning that to
-      //unsubscribeFromAuth and calling it before unmounting the App
-      if (user) {
-        const userRef = await createUserProfileDocument(user);
-
-        userRef.onSnapshot((snapShot) => {
-          this.props.setCurrentUser({ ...snapShot.data(), id: snapShot.id });
-        });
-      } else {
-        this.props.setCurrentUser(user);
-      }
-    });
-  };
-
-  componentWillUnmount = () => {
-    this.unsubscribeFromAuth();
-  };
-
-
+  
   render() {
     return (
-      <div className="header">
-        <Link to="/" className="logo-container">
+      <HeaderContainer>
+        <LogoContainer to="/">
           <Logo />
-        </Link>
-        <div className="options">
-          <Link to="/shop" className="option">
-            SHOP
-          </Link>
-          <Link to="/contact" className="option">
+        </LogoContainer>
+        <OptionsContainer>
+          <OptionLink to="/shop">SHOP</OptionLink>
+          <OptionLink to="/contact" className="option">
             CONTACT
-          </Link>
+          </OptionLink>
           {this.props.user ? (
-            <div
-              className="option"
-              style={{ cursor: "pointer" }}
-              onClick={() => auth.signOut()}
-            >
-              SIGN OUT
-            </div>
+            <OptionDiv onClick={() => this.props.signOutStart()}>SIGN OUT</OptionDiv>
           ) : (
-            <Link to="/signIn" className="option">
+            <OptionLink to="/signIn" className="option">
               SIGN IN
-            </Link>
+            </OptionLink>
           )}
-          <CartIcon  />
-        </div>
+          <CartIcon />
+        </OptionsContainer>
         {this.props.showDropdown ? <CartDropdown /> : null}
-      </div>
+      </HeaderContainer>
     );
   }
 }
@@ -71,9 +46,8 @@ const mapStateToProps = (state) => {
   return {
     user: state.userReducer.currentUser,
     showDropdown: state.cartReducer.showDropdown,
+    shopData: state.shopDataReducer.collections,
   };
 };
 
-export default connect(mapStateToProps, { setCurrentUser })(
-  HeaderComponent
-);
+export default connect(mapStateToProps, { signOutStart })(HeaderComponent);

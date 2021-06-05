@@ -1,7 +1,7 @@
 import React from "react";
 import "./CheckOut.style.scss";
 import CheckOutItemComponent from "../../Components/CheckOutItemComponent/CheckOutItem.Component";
-import { selectCartItemsTotalPrice } from "../../actions/Cart/Cart.selector";
+import { selectCartItemsTotalPrice } from "../../reducers/CartReducer/Cart.selector";
 import StripeCheckoutButton from '../../Components/StripeCheckout/StripeCheckout.Component';
 import { connect } from "react-redux";
 

@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Shop.style.scss";
-import CollectionViewComponent from "../../Components/CollectionViewComponent/CollectionView.Component";
-import {Route} from 'react-router-dom';
-import CategoryPage from '../Category/Category.Component';
+import { Route } from "react-router-dom";
+import CategoryPageContainer from '../Category/Category.Container';
+import { connect } from "react-redux";
+import { fetchCollectionStart } from "../../reducers/ShopReducer/Shop.Actions";
+import CollectionViewContainer from '../../Components/CollectionViewComponent/CollectionView.Container';
 
-class ShopComponent extends React.Component {
-  render() {
-    const { match } = this.props;
+
+const ShopComponent = ({fetchCollectionStart, match}) => {
+
+  useEffect(() => {
+    fetchCollectionStart();
+  }, [fetchCollectionStart]);  // this is to tell useEffect to run only if fetchCollectionStart changes... 
+
     return (
       <div className="shop-page">
-        <Route exact path={`${match.path}`} component={CollectionViewComponent} />
-        <Route path={`${match.path}/:categoryId`} component={CategoryPage} />
+        <Route
+          exact
+          path={`${match.path}`}
+          component={CollectionViewContainer}
+        />
+        <Route
+          path={`${match.path}/:categoryId`}
+          component={CategoryPageContainer}
+        />
       </div>
     );
   }
-}
 
-export default ShopComponent;
+
+
+export default connect(null, { fetchCollectionStart })(ShopComponent);

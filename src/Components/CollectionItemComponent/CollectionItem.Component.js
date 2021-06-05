@@ -1,25 +1,24 @@
-import React from 'react';
-import CustomButton from '../Custom-button/Custom-button.Component';
-import {additem} from '../../actions/Cart/showCart';
-import {connect} from 'react-redux';
-import './CollectionItem.style.scss';
-
-const CollectionItem = ({item,additem}) => (
-   
-            <div className="collection-item" key={item.id}>
-              <div
-                className="image"
-                style={{ backgroundImage: `url(${item.imageUrl})` }}
-              ></div>
-
-              <div className="collection-footer">
-                <span className="name">{item.name}</span>
-                <span className="price">${item.price}</span>
-              </div>
-              <CustomButton type="button" inverted="inverted" onClick={() => additem(item)}>ADD TO CART</CustomButton>
-            </div>
-          
-    )
+import React from "react";
+import { additem } from "../../reducers/CartReducer/showCart";
+import { connect } from "react-redux";
+import "./CollectionItem.style.scss";
+import {CollectionFooterContainer,CollectionItemContainer,ImageContainer,NameContainer,PriceContainer,Additem} from './CollectionItem.styles';
 
 
-export default connect(null,{additem})(CollectionItem);
+const CollectionItem = ({ item, additem }) => (
+  <CollectionItemContainer key={item.id}>
+    <ImageContainer className="image"
+      style={{ backgroundImage: `url(${item.imageUrl})` }}
+    ></ImageContainer>
+
+    <CollectionFooterContainer>
+      <NameContainer className="name">{item.name}</NameContainer>
+      <PriceContainer className="price">${item.price}</PriceContainer>
+    </CollectionFooterContainer>
+    <Additem type="button" inverted="inverted" onClick={() => additem(item)}>
+      ADD TO CART
+    </Additem>
+  </CollectionItemContainer>
+);
+
+export default connect(null, { additem })(CollectionItem);

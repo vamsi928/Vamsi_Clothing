@@ -2,12 +2,13 @@ import React from "react";
 import "./Preview.style.scss";
 import CollectionItem from "../CollectionItemComponent/CollectionItem.Component";
 import { connect } from "react-redux";
-import { additem } from "../../actions/Cart/showCart";
+import { additem } from "../../reducers/CartReducer/showCart";
+import history  from '../../history';
 
 const PreviewComponent = (props) => {
   return (
     <div className="collection-preview">
-      <h1 className="title">{props.collection.title.toUpperCase()}</h1>
+      <h1 className="title" onClick={() => history.push(`/shop/${props.collection.routeName}`)}>{props.collection.title.toUpperCase()}</h1>
       <div className="preview">
         {props.collection.items
           .filter((item, index) => index < 4)

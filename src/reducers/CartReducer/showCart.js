@@ -1,29 +1,35 @@
-import {userActionTypes} from '../../reducers/types';
+import {cartActionTypes} from './CartTypes';
 
 export const showCart = () =>{
     return {
-        type: userActionTypes.SHOW_DROPDOWN,
+        type: cartActionTypes.SHOW_DROPDOWN,
         
     }
 }
 
 export const additem = (payload) =>{
     return {
-        type: userActionTypes.ADD_ITEM,
+        type: cartActionTypes.ADD_ITEM,
         payload: payload
     }
 }
 
 export const removeitem = (id) =>{
     return {
-        type: userActionTypes.REMOVE_ITEM,
+        type: cartActionTypes.REMOVE_ITEM,
         payload: id
     }
 }
 
 export const removeSingleItem = (item) =>{
     return {
-        type: userActionTypes.REMOVE_SINGLE_ITEM,
+        type: cartActionTypes.REMOVE_SINGLE_ITEM,
         payload: item
+    }
+}
+
+export const clearCart = () => {
+    return{
+        type: cartActionTypes.CLEAR_CART
     }
 }
