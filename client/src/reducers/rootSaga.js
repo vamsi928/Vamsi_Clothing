@@ -1,5 +1,5 @@
 import { all } from "redux-saga/effects";
-import { fetchCollectionStart } from "./ShopReducer/Shop.saga";
+import { onfetchCollectionStart } from "./ShopReducer/Shop.saga";
 import {
   onGoogleSignInStart,
   onEmailAndPasswordSignIn, onCheckUserSession, onSignOutSaga, onSignUpSaga, onSignUpSuccess
@@ -7,7 +7,7 @@ import {
 
 export default function* rootSaga() {
   yield all([
-    fetchCollectionStart(),
+    onfetchCollectionStart(),
     onGoogleSignInStart(),
     onEmailAndPasswordSignIn(),
     onCheckUserSession(),

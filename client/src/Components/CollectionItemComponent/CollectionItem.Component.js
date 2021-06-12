@@ -1,9 +1,10 @@
 import React from "react";
 import { additem } from "../../reducers/CartReducer/showCart";
 import { connect } from "react-redux";
-import "./CollectionItem.style.scss";
+//import "./CollectionItem.style.scss";
 import {CollectionFooterContainer,CollectionItemContainer,ImageContainer,NameContainer,PriceContainer,Additem} from './CollectionItem.styles';
 
+//This component uses styled component styling from CollectionItem.styles.js
 
 const CollectionItem = ({ item, additem }) => (
   <CollectionItemContainer key={item.id}>

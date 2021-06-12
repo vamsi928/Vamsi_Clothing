@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.style.scss";
+//import "./Header.style.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { connect } from "react-redux";
 import CartIcon from "../CartIconComponent/CartIcon.Component";
@@ -14,7 +14,9 @@ import {
 import { signOutStart } from '../../reducers/UserReducer/User.actions'
 
 class HeaderComponent extends React.Component {
-  
+  // this component use styled component styles frmo Header.styles.js
+
+
   render() {
     return (
       <HeaderContainer>
